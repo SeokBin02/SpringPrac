@@ -16,7 +16,7 @@ public class Main {
         OrderService orderService;
 
         // 치킨 주문 요청
-        orderService = new ChickenService(new OrderList("치킨"));
+        orderService = new ChickenService(new OrderList("치킨", "Katarina", "1234"));
         consumer = new OrderApplication(orderService);
         consumer.order(Menu.Chicken, 3);
         consumer.order(Menu.Chicken, 4);
@@ -24,7 +24,7 @@ public class Main {
         consumer.order(Menu.Chicken, 11);
         consumer.order(Menu.Chicken, 1);
         // 요청 받은 Request 확인
-        OrderList orderList = new OrderList("치킨");
+        OrderList orderList = new OrderList("치킨", "Katarina", "1234");
         for(Order order : orderList.getOrderList()){
             System.out.println(order.getFoodName());
             System.out.println(order.getPrice());
@@ -32,7 +32,7 @@ public class Main {
         }
 
         // 피자 주문 요청
-        orderService = new PizzaService(new OrderList("피자"));
+        orderService = new PizzaService(new OrderList("피자", "Ben", "5555"));
         consumer = new OrderApplication(orderService);
         consumer.order(Menu.Pizza, 2);
         consumer.order(Menu.Pizza, 21);
@@ -40,7 +40,7 @@ public class Main {
         consumer.order(Menu.Pizza, 7);
 
         // 요청 받은 Request 확인
-        orderList = new OrderList("피자");
+        orderList = new OrderList("피자", "Ben", "5555");
         for(Order order : orderList.getOrderList()){
             System.out.println(order.getFoodName());
             System.out.println(order.getPrice());

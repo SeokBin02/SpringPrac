@@ -9,9 +9,14 @@ import java.util.stream.Collectors;
 // Service에서 요구하는 dateBase를 처리하는 Repository
 public class OrderList {
     private String foodName;
+    private String userName;
+    private String password;
 
-    public OrderList(String foodName) {
+    // Consumer의 아이디 비밀번호를 입력받아 Database에 접근
+    public OrderList(String foodName, String userName, String password) {
         this.foodName = foodName;
+        this.userName = userName;
+        this.password = password;
     }
 
     // 모든 클래스가 접근할 수 있도록 static 선언을 해준다.
