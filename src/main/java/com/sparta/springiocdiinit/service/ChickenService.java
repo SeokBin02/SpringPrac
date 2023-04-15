@@ -1,8 +1,10 @@
 package com.sparta.springiocdiinit.service;
 
 
+import com.sparta.springiocdiinit.entity.Inventory;
 import com.sparta.springiocdiinit.entity.Order;
 import com.sparta.springiocdiinit.enums.Menu;
+import com.sparta.springiocdiinit.repository.InventoryRepository;
 import com.sparta.springiocdiinit.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -21,15 +23,18 @@ import java.util.List;
 public class ChickenService implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final InventoryRepository inventoryRepository;
 
     @Autowired
-    public ChickenService(OrderRepository orderRepository) {
+    public ChickenService(OrderRepository orderRepository, InventoryRepository inventoryRepository) {
         this.orderRepository = orderRepository;
+        this.inventoryRepository = inventoryRepository;
     }
 
     @Override
     public void order(Menu menu, int amount) {
         Order order = new Order(menu.getFoodName(), menu.getPrice(), amount);
+        List<Inventory> all = inventoryRepository.findAll();
         orderRepository.save(order);
     }
 
