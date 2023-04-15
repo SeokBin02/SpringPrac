@@ -4,6 +4,9 @@ package step1;
 import step1.app.Consumer;
 import step1.app.OrderApplication;
 import step1.enums.Menu;
+import step1.injector.ChickenInjector;
+import step1.injector.MenuInjector;
+import step1.injector.PizzaInjector;
 import step1.order.Order;
 import step1.order.OrderList;
 import step1.service.ChickenService;
@@ -14,9 +17,12 @@ public class Main {
     public static void main(String[] args) {
         Consumer consumer;
         OrderService orderService;
+        MenuInjector menuInjector;
+
 
         // 치킨 주문 요청
-        orderService = new ChickenService(new OrderList("치킨", "Katarina", "1234"));
+        menuInjector = new ChickenInjector();
+        orderService = menuInjector.getService();
         consumer = new OrderApplication(orderService);
         consumer.order(Menu.Chicken, 3);
         consumer.order(Menu.Chicken, 4);
@@ -32,7 +38,8 @@ public class Main {
         }
 
         // 피자 주문 요청
-        orderService = new PizzaService(new OrderList("피자", "Ben", "5555"));
+        menuInjector = new PizzaInjector();
+        orderService = menuInjector.getService();
         consumer = new OrderApplication(orderService);
         consumer.order(Menu.Pizza, 2);
         consumer.order(Menu.Pizza, 21);
